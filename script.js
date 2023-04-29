@@ -12,14 +12,14 @@ async function getMenu() {
        
         
         var divBody = `
-        <div class="card" onclick="takeOrder(this)">
+        <div class="card" >
             <img src="${data[i].imgSrc}" class="card-img" alt="" >
             <div class="content">
                 <h2>${data[i].id}</h2>
                 <h3>${data[i].name}</h3>
                 <h3 style="color: red;"> Price: ${data[i].price}</h3>
                 
-                <!--<a href="#">order</a>-->
+               <!-- <a href="#" onclick="takeOrder(${data[i].id},'${data[i].imgSrc}','${data[i].name}',${data[i].price})" >order</a>-->
             </div>
         </div>`;
         container.innerHTML+= divBody;
@@ -35,16 +35,20 @@ async function getMenu() {
 
   
   // Function to take the order
-  function takeOrder(orderid) {
+  function takeOrder() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const order=orderid;
-        // const burgers = ['burger 1', 'burger 2', 'burger 3'];
-        // const order = {
-        //   burger1: burgers[Math.floor(Math.random() * burgers.length)],
-        //   burger2: burgers[Math.floor(Math.random() * burgers.length)],
-        //   burger3: burgers[Math.floor(Math.random() * burgers.length)]
-        // };
+        
+        // console.log(orderid,imglink,proName,proPrice);
+        // console.log(orderid.children[1].children[2].innerText);
+         const burgers = ["Burger 1","Burger 2","Burger 3"];
+        //  const order=burgers;
+        const order = {
+          burger1: burgers[Math.floor(Math.random() * burgers.length)],
+          burger2: burgers[Math.floor(Math.random() * burgers.length)],
+          burger3: burgers[Math.floor(Math.random() * burgers.length)]
+        };
+        
         resolve(order);
       }, 2500);
     });
@@ -95,7 +99,7 @@ async function getMenu() {
     })
     .catch(error => console.error(error));
   
-  //this Async/await
+//   this Async/await
   async function runOrder() {
     try {
       await getMenu();
